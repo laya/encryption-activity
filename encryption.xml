@@ -12,7 +12,7 @@
         <title>encryption</title>
         <description>Discover basic encryption method</description>
         <prerequisite></prerequisite>
-        <goal>To teach the basic substitution cipher technique</goal>
+        <goal>Goal of this activity is to teach the basic substitution cipher technique. Encryption is the method in which the message or information (referred to as plaintext) is changed into an unreadable ciphertext. Each character in the alphabet is assigned with a key(number/character/symbol), based on the key the plain text message is converted to cipher/encrypted text.</goal>
         <manual>Player must refer to key table present at the top of screen and match the alphabets with the keys</manual>
         <credit></credit>
   </Board>
