@@ -140,10 +140,6 @@ class Gcompris_encryption:
     self.display_images(p.get_pair())
 
 
-  def next_level_click(self, widget, target, event):
-    self.gcomprisBoard.level += 1
-    self.next_level()
-
   def next_level(self):
 
     self.rootitem.remove()
@@ -228,26 +224,23 @@ class Gcompris_encryption:
                    text = _("Place the tux on appropriate ice patch")
                    ) 
 
+  # To be run on a win
+  def win(self):
+    self.increment_level()
+    gcompris.sound.play_ogg("sounds/tuxok.wav")
+    gcompris.bonus.display(gcompris.bonus.WIN, gcompris.bonus.TUX)
+
   # Increment game points
   def increment_points(self):
     self.points += 1
-    if (self.gcomprisBoard.level == 1):
-      if (self.points == 3):
-        self.increment_level()
-        gcompris.sound.play_ogg("sounds/tuxok.wav")
-        gcompris.bonus.display(gcompris.bonus.WIN, gcompris.bonus.TUX)
+    if ((self.gcomprisBoard.level == 1) and (self.points == 3)):
+      self.win()
 
-    elif (self.gcomprisBoard.level == 2):
-      if (self.points == 5):
-        self.increment_level()
-        gcompris.sound.play_ogg("sounds/tuxok.wav")
-        gcompris.bonus.display(gcompris.bonus.WIN, gcompris.bonus.TUX)
+    elif ((self.gcomprisBoard.level == 2) and (self.points == 5)):
+      self.win()
 
-    elif (self.gcomprisBoard.level == 3):
-      if (self.points == 7):
-        self.increment_level()
-        gcompris.sound.play_ogg("sounds/tuxok.wav")
-        gcompris.bonus.display(gcompris.bonus.WIN, gcompris.bonus.TUX)
+    elif ((self.gcomprisBoard.level == 3) and (self.points == 7)):
+      self.win()
 
 
 # A Tux

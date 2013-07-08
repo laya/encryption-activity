@@ -50,9 +50,16 @@ class key_value:
       self.pair[alphabet] = self.temp[index]
 
     self.rootitem = goocanvas.Group(parent = rootitem)
-    goocanvas.Rect(parent=self.rootitem,x=10, y=20, width=780, height=200,
-				stroke_color="black", fill_color="white",
-				line_width=1.0)
+    goocanvas.Rect(parent=self.rootitem,
+                   x=10,
+                   y=20,
+                   width=780,
+                   height=200,
+                   stroke_color="black",
+                   fill_color="white",
+                   line_width=1.0
+                   )
+
     fill_color = 0x80e072eeL
     stroke_color = 0xed6d6deeL
     fill_color1 = 0xed6d6deeL
