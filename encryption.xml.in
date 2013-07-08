@@ -13,7 +13,7 @@
         <_description>Discover basic encryption method</_description>
         <_prerequisite></_prerequisite>
         <_goal>To teach the basic substitution cipher technique</_goal>
-        <_manual>Player must refer to key table present at the top of screen and match the alphabets with the key</_manual>
+        <_manual>Player must refer to key table present at the top of screen and match the alphabets with the keys</_manual>
         <_credit></_credit>
   </Board>
   <Data directory=""/>

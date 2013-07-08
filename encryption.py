@@ -47,13 +47,10 @@ class Gcompris_encryption:
     # Save the gcomprisBoard, it defines everything we need
     # to know from the core
     self.gcomprisBoard = gcomprisBoard
-    # self.game_complete = False
     self.gcomprisBoard.level = 1
-    self.gcomprisBoard.maxlevel = 4
+    self.gcomprisBoard.maxlevel = 3
     self.gcomprisBoard.sublevel = 1
     self.gcomprisBoard.number_of_sublevel = 3
-
-    self.win = 0
 
     # Parameters for different sublevels
     self.NUMBERS = 1
@@ -114,7 +111,6 @@ class Gcompris_encryption:
 
   # Called by gcompris when the user clicks on level icons
   def set_level(self, level):
-    print("encryption set level. %i" % level)
     self.gcomprisBoard.level = level
     self.gcomprisBoard.sublevel = 1
     self.next_level()
@@ -152,45 +148,14 @@ class Gcompris_encryption:
       self.gcomprisBoard.canvas.get_root_item())
 
     if (self.gcomprisBoard.level == 1):
-      # Set a background image
-      self.backitem = goocanvas.Group(parent = \
-        self.gcomprisBoard.canvas.get_root_item())
-      # Set the buttons we want in the bar
-      gcompris.bar_set(0)
-      gcompris.bar_location(20, -1, 0.6)
-      svghandle = gcompris.utils.load_svg("encryption/background.svgz")
-      goocanvas.Text(parent = self.backitem,
-                     x = 385,
-                     y = 100,
-                     fill_color = "black",
-                     font = gcompris.skin.get_font("gcompris/title"),
-                     anchor = gtk.ANCHOR_CENTER,
-                     text = _(" Encryption ")
-                     )
-      
-      # Encryption Intro
-      text = _("Encryption is the method in which the message or information (referred to as plaintext) is changed into an unreadable ciphertext.")
-      # Encryption Description
-      text += "\n" + \
-        _("Each character in the alphabet is assigned with a key(number/character/symbol) "
-              "based on the key the plain text message is converted to cipher/encrypted text. "
-          )
-      goocanvas.Text(parent=self.rootitem,
-                     x = 490,
-                     y = 280,
-                     fill_color = "black",
-                     font = gcompris.skin.get_font("gcompris/subtitle"),
-                     width = 395,
-                     anchor = gtk.ANCHOR_CENTER,
-                     text = text)
-
-      ok = goocanvas.Svg(parent = self.rootitem,
-                         svg_handle = gcompris.skin.svg_get(),
-                         svg_id = "#OK",
-                         tooltip = _("Click to play with encryption of text")
-                         )
-      ok.translate(150,-5)
-      ok.connect("button_press_event", self.next_level_click)
+      gcompris.set_background(self.gcomprisBoard.canvas.get_root_item(), "encryption/background.jpg")
+      gcompris.bar_set(gcompris.BAR_LEVEL)
+      gcompris.bar_set_level(self.gcomprisBoard)
+      gcompris.bar_set(gcompris.BAR_LEVEL|gcompris.BAR_REPEAT_ICON)
+      gcompris.bar_location(630, -1, 0.5)
+      p = key_value(self.rootitem, self.VALUE)
+      self.display_arrow()
+      self.display_images(p.get_pair())
 
     elif (self.gcomprisBoard.level == 2):
       gcompris.set_background(self.gcomprisBoard.canvas.get_root_item(), "encryption/background.jpg")
@@ -203,16 +168,6 @@ class Gcompris_encryption:
       self.display_images(p.get_pair())
 
     elif (self.gcomprisBoard.level == 3):
-      gcompris.set_background(self.gcomprisBoard.canvas.get_root_item(), "encryption/background.jpg")
-      gcompris.bar_set(gcompris.BAR_LEVEL)
-      gcompris.bar_set_level(self.gcomprisBoard)
-      gcompris.bar_set(gcompris.BAR_LEVEL|gcompris.BAR_REPEAT_ICON)
-      gcompris.bar_location(630, -1, 0.5)
-      p = key_value(self.rootitem, self.VALUE)
-      self.display_arrow()
-      self.display_images(p.get_pair())
-
-    elif (self.gcomprisBoard.level == 4):
       gcompris.set_background(self.gcomprisBoard.canvas.get_root_item(), "encryption/background.jpg")
       gcompris.bar_set(gcompris.BAR_LEVEL)
       gcompris.bar_set_level(self.gcomprisBoard)
@@ -245,11 +200,11 @@ class Gcompris_encryption:
 
   def display_images(self, pair):
     # Number of letters according to the level
-    if self.gcomprisBoard.level == 2:
+    if self.gcomprisBoard.level == 1:
       nos = 3
-    elif self.gcomprisBoard.level == 3:
+    elif self.gcomprisBoard.level == 2:
       nos = 5
-    elif self.gcomprisBoard.level == 4:
+    elif self.gcomprisBoard.level == 3:
       nos = 7
 
     self.points = 0
@@ -292,19 +247,19 @@ class Gcompris_encryption:
   # Increment game points
   def increment_points(self):
     self.points += 1
-    if (self.gcomprisBoard.level == 2):
+    if (self.gcomprisBoard.level == 1):
       if (self.points == 3):
         self.increment_level()
         gcompris.sound.play_ogg("sounds/tuxok.wav")
         gcompris.bonus.display(gcompris.bonus.WIN, gcompris.bonus.TUX)
 
-    elif (self.gcomprisBoard.level == 3):
+    elif (self.gcomprisBoard.level == 2):
       if (self.points == 5):
         self.increment_level()
         gcompris.sound.play_ogg("sounds/tuxok.wav")
         gcompris.bonus.display(gcompris.bonus.WIN, gcompris.bonus.TUX)
 
-    elif (self.gcomprisBoard.level == 4):
+    elif (self.gcomprisBoard.level == 3):
       if (self.points == 7):
         self.increment_level()
         gcompris.sound.play_ogg("sounds/tuxok.wav")
