@@ -128,13 +128,16 @@ class Gcompris_encryption:
     return 1
 
 
-  # Place background image and control bar
+  # Setup the game stage
   def base_setup(self):
     gcompris.set_background(self.gcomprisBoard.canvas.get_root_item(), "encryption/background.jpg")
     gcompris.bar_set(gcompris.BAR_LEVEL)
     gcompris.bar_set_level(self.gcomprisBoard)
     gcompris.bar_set(gcompris.BAR_LEVEL|gcompris.BAR_REPEAT_ICON)
     gcompris.bar_location(630, -1, 0.5)
+    p = key_value(self.rootitem, self.VALUE)
+    self.display_arrow()
+    self.display_images(p.get_pair())
 
 
   def next_level_click(self, widget, target, event):
@@ -156,24 +159,8 @@ class Gcompris_encryption:
     self.rootitem = goocanvas.Group(parent = \
       self.gcomprisBoard.canvas.get_root_item())
 
-    if (self.gcomprisBoard.level == 1):
-      self.base_setup()
-      p = key_value(self.rootitem, self.VALUE)
-      self.display_arrow()
-      self.display_images(p.get_pair())
+    self.base_setup()
 
-    elif (self.gcomprisBoard.level == 2):
-      self.base_setup()
-      p = key_value(self.rootitem, self.VALUE)
-      self.display_arrow()
-      self.display_images(p.get_pair())
-
-    elif (self.gcomprisBoard.level == 3):
-      self.base_setup()
-      p = key_value(self.rootitem, self.VALUE)
-      self.display_arrow()
-      self.display_images(p.get_pair())
-  
 
   def display_arrow(self):
     x_init = 40
